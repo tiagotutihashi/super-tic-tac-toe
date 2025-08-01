@@ -6,7 +6,7 @@
 script = ExtResource("1_e0onf")
 turn_label = NodePath("Control/TurnLabel")
 result_label = NodePath("Control/Result")
-restart_button = NodePath("Control/MainMenuButton")
+restart_button = NodePath("Control/RestartButton")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

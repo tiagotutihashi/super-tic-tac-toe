@@ -28,6 +28,7 @@ environment = SubResource("Environment_48and")
 
 [node name="GameManager" parent="." node_paths=PackedStringArray("board") instance=ExtResource("2_8nfiu")]
 board = NodePath("../Board 1-1")
+base_game = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 48.7028, 107.306, -0.223107)
@@ -39,4 +40,5 @@ script = ExtResource("2_jdayy")
 [node name="Cube" parent="." instance=ExtResource("1_1w1q6")]
 
 [node name="Board 1-1" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("2_6qyon")]
+index = -1
 game_manager = NodePath("../GameManager")
