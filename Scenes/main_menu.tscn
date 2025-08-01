@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://454rktr0offa"]
+
+[ext_resource type="Script" uid="uid://ccfo0suiry2ro" path="res://Scenes/main_menu.gd" id="1_28flt"]
+[ext_resource type="PackedScene" uid="uid://dqglwf4ajxw31" path="res://Scenes/base.tscn" id="2_1ehe0"]
+[ext_resource type="PackedScene" uid="uid://3kbcggqbpnra" path="res://Scenes/Super.tscn" id="3_ce3w2"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28flt")
+base_scene = ExtResource("2_1ehe0")
+super_scene = ExtResource("3_ce3w2")
+
+[node name="Control" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 641.0
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 70
+text = "SUPER TIC TAC TOE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal button" type="Button" parent="Control"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Normal"
+
+[node name="Super button" type="Button" parent="Control"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Super"
+
+[connection signal="pressed" from="Control/Normal button" to="." method="_on_normal_button_pressed"]
+[connection signal="pressed" from="Control/Super button" to="." method="_on_super_button_pressed"]

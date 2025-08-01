@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://3kbcggqbpnra"]
+
+[ext_resource type="PackedScene" uid="uid://cdd67mrv683r1" path="res://Scenes/hud.tscn" id="1_xs5am"]
+[ext_resource type="PackedScene" uid="uid://bw1pyhhilbm3l" path="res://Assets/Nodes/game_manager.tscn" id="2_k7goh"]
+[ext_resource type="Script" uid="uid://bvtb6v4riqcu0" path="res://Assets/Nodes/planes.gd" id="3_hn3l3"]
+[ext_resource type="PackedScene" uid="uid://bbqai6anuxa8u" path="res://Assets/Nodes/plane.tscn" id="4_1qu4k"]
+[ext_resource type="PackedScene" uid="uid://njhxwtks2wxm" path="res://Assets/Nodes/board.tscn" id="5_50aj7"]
+[ext_resource type="Script" uid="uid://dcpkxflq0g7rf" path="res://Assets/camera_3d.gd" id="6_whpfm"]
+[ext_resource type="Script" uid="uid://dl1shtnsub412" path="res://Assets/boards.gd" id="7_k7goh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6dfhk"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_70qbu"]
+sky_material = SubResource("ProceduralSkyMaterial_6dfhk")
+
+[sub_resource type="Environment" id="Environment_srdsp"]
+background_mode = 2
+sky = SubResource("Sky_70qbu")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="HUD" parent="." instance=ExtResource("1_xs5am")]
+
+[node name="GameManager" parent="." node_paths=PackedStringArray("board", "boards", "planes") instance=ExtResource("2_k7goh")]
+board = NodePath("../Board")
+boards = NodePath("../Boards")
+planes = NodePath("../Planes")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_srdsp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Planes" type="Node3D" parent="." node_paths=PackedStringArray("planes")]
+script = ExtResource("3_hn3l3")
+planes = [NodePath("Cube 1-1"), NodePath("Cube 1-2"), NodePath("Cube 1-3"), NodePath("Cube 1-4"), NodePath("Cube 1-5"), NodePath("Cube 1-6"), NodePath("Cube 1-7"), NodePath("Cube 1-8"), NodePath("Cube 1-9")]
+
+[node name="Cube 1-1" parent="Planes" instance=ExtResource("4_1qu4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, -46)
+
+[node name="Cube 1-2" parent="Planes" instance=ExtResource("4_1qu4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46)
+
+[node name="Cube 1-3" parent="Planes" instance=ExtResource("4_1qu4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -46)
+
+[node name="Cube 1-4" parent="Planes" instance=ExtResource("4_1qu4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, 0)
+
+[node name="Cube 1-5" parent="Planes" instance=ExtResource("4_1qu4k")]
+
+[node name="Cube 1-6" parent="Planes" instance=ExtResource("4_1qu4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, 0)
+
+[node name="Cube 1-7" parent="Planes" instance=ExtResource("4_1qu4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, 46)
+
+[node name="Cube 1-8" parent="Planes" instance=ExtResource("4_1qu4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46)
+
+[node name="Cube 1-9" parent="Planes" instance=ExtResource("4_1qu4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, 46)
+
+[node name="Board" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("5_50aj7")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+index = -1
+game_manager = NodePath("../GameManager")
+playable = false
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 91.1205, 0)
+script = ExtResource("6_whpfm")
+
+[node name="Boards" type="Node3D" parent="." node_paths=PackedStringArray("boards")]
+script = ExtResource("7_k7goh")
+boards = [NodePath("Board 1-1"), NodePath("Board 1-2"), NodePath("Board 1-3"), NodePath("Board 1-4"), NodePath("Board 1-5"), NodePath("Board 1-6"), NodePath("Board 1-7"), NodePath("Board 1-8"), NodePath("Board 1-9")]
+
+[node name="Board 1-1" parent="Boards" instance=ExtResource("5_50aj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, -46)
+
+[node name="Board 1-2" parent="Boards" instance=ExtResource("5_50aj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46)
+index = 1
+
+[node name="Board 1-3" parent="Boards" instance=ExtResource("5_50aj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -46)
+index = 2
+
+[node name="Board 1-4" parent="Boards" instance=ExtResource("5_50aj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, 0)
+index = 3
+
+[node name="Board 1-5" parent="Boards" instance=ExtResource("5_50aj7")]
+index = 4
+
+[node name="Board 1-6" parent="Boards" instance=ExtResource("5_50aj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, 0)
+index = 5
+
+[node name="Board 1-7" parent="Boards" instance=ExtResource("5_50aj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, 46)
+index = 6
+
+[node name="Board 1-8" parent="Boards" instance=ExtResource("5_50aj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46)
+index = 7
+
+[node name="Board 1-9" parent="Boards" instance=ExtResource("5_50aj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, 46)
+index = 8

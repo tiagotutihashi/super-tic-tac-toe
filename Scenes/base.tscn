@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqglwf4ajxw31"]
+
+[ext_resource type="PackedScene" uid="uid://bbqai6anuxa8u" path="res://Assets/Nodes/plane.tscn" id="1_1w1q6"]
+[ext_resource type="PackedScene" uid="uid://cdd67mrv683r1" path="res://Scenes/hud.tscn" id="1_8nfiu"]
+[ext_resource type="PackedScene" uid="uid://njhxwtks2wxm" path="res://Assets/Nodes/board.tscn" id="2_6qyon"]
+[ext_resource type="PackedScene" uid="uid://bw1pyhhilbm3l" path="res://Assets/Nodes/game_manager.tscn" id="2_8nfiu"]
+[ext_resource type="Script" uid="uid://dcpkxflq0g7rf" path="res://Assets/camera_3d.gd" id="2_jdayy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nfiu"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_e4po7"]
+sky_material = SubResource("ProceduralSkyMaterial_8nfiu")
+
+[sub_resource type="Environment" id="Environment_48and"]
+background_mode = 2
+sky = SubResource("Sky_e4po7")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="HUD" parent="." instance=ExtResource("1_8nfiu")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_48and")
+
+[node name="GameManager" parent="." node_paths=PackedStringArray("board") instance=ExtResource("2_8nfiu")]
+board = NodePath("../Board 1-1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 48.7028, 107.306, -0.223107)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 29.4377, 0)
+script = ExtResource("2_jdayy")
+
+[node name="Cube" parent="." instance=ExtResource("1_1w1q6")]
+
+[node name="Board 1-1" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("2_6qyon")]
+game_manager = NodePath("../GameManager")

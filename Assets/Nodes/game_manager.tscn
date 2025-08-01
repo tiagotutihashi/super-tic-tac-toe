@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw1pyhhilbm3l"]
+
+[ext_resource type="Script" uid="uid://bj1dlijuaqef3" path="res://Assets/game_manager.gd" id="1_igymh"]
+
+[node name="GameManager" type="Node" node_paths=PackedStringArray("boards")]
+script = ExtResource("1_igymh")
+boards = [NodePath("")]

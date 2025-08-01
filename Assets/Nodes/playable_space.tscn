@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqxy3qwlk7slg"]
+
+[ext_resource type="Script" uid="uid://dhwcensdrrv42" path="res://Assets/playable_space.gd" id="1_dveav"]
+[ext_resource type="PackedScene" uid="uid://0xv3qpcgob2n" path="res://Assets/Nodes/o.tscn" id="2_qjp2l"]
+[ext_resource type="PackedScene" uid="uid://dywf6x3gko3p" path="res://Assets/Nodes/x.tscn" id="3_by87e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qjp2l"]
+size = Vector3(9.76152, 1, 10.499)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8nfiu"]
+size = Vector3(10.0019, 1, 10.1376)
+
+[node name="PlayableSpace" type="Area3D"]
+input_ray_pickable = false
+script = ExtResource("1_dveav")
+
+[node name="o" parent="." instance=ExtResource("2_qjp2l")]
+visible = false
+
+[node name="x_001" parent="." instance=ExtResource("3_by87e")]
+visible = false
+
+[node name="test" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16214, 0)
+shape = SubResource("BoxShape3D_qjp2l")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 6.18172e-13, 0, -2.78855e-12, 1, 0, 0, 0, 1, 7.04908e-05, 0.199743, 6.20083e-06)
+shape = SubResource("BoxShape3D_8nfiu")
+disabled = true
+
+[connection signal="ready" from="." to="." method="_on_ready"]
